@@ -38,14 +38,6 @@
                         </tr>
                     @endforeach
                 </table>
-                <div class="form-group">
-                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-                        <button type="submit" class="btn btn-default btn-primary"
-                                onclick="javascript: window.location = '{{url('/validerFrais')}}';">
-                            <span class="glyphicon glyphicon-ok"></span> Ajouter des médicaments
-                        </button>
-                        &nbsp;</div>
-                </div>
             </div>
         </div>
     </div>

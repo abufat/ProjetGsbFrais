@@ -23,8 +23,8 @@
                     @if (Session::get('id') > 0)
                     <div class="collapse navbar-collapse" id="navbar-collapse-target">
                         <ul class="nav navbar-nav">
-                            <li><a href="{{url('/getListeFrais')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Lister</a></li>
-                            <li><a href="{{url('/ajouterFrais')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter</a></li>
+                            <li><a href="{{url('/getMedFamille')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Lister médicaments par familles</a></li>
+                            <li><a href="{{url('/getComposants')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Liste des médicaments</a></li>
                             <li><a href="{{url('/chercheRapport')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Chercher un rapport de Visite</a></li>
                             <li><a href="{{url('/ajouterVisite')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter un rapport de visite</a></li>
 

@@ -55,8 +55,9 @@ Route::get('/getListeMed/{id}','App\Http\Controllers\RapportVisiteController@get
 
 Route::get('/supprimerMed/{id}','App\Http\Controllers\RapportVisiteController@removeMedicaments');
 
+Route::post('/validerMed','App\Http\Controllers\RapportVisiteController@validateMed');
 
+Route::get('/getComposants','App\Http\Controllers\MedicamentController@getComp');
 
-
-
+Route::get('/getMedFamille','App\Http\Controllers\MedicamentController@getMedsFamille');
 

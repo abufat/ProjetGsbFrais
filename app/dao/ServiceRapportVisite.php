@@ -97,11 +97,11 @@ class ServiceRapportVisite
         }
 
     }
-    public function deleteMedicament($id_med)
+    public function deleteMedicament($id_med, $id_rapp)
     {
 
         try {
-            DB::table('offrir')->where('id_medicament', $id_med)->delete();
+            DB::table('offrir')->where('id_medicament', $id_med)('id_rapport', $id_rapp)->delete();
         } catch (QueryException $e) {
             $erreur=$e->getMessage();
             if ($e->getCode()==23000) {
@@ -110,6 +110,33 @@ class ServiceRapportVisite
             throw new MonException($erreur,5);
         }
     }
+    public function getUnMedicament($id_rapport)
+    {
+        try {
+            $medicament = DB::table('rapport_visite')
+                ->join('offrir', 'offrir.id_rapport', '=', 'rapport_visite.id_rapport')
+                ->join('medicament', 'medicament.id_medicament', '=', 'offrir.id_medicament')
+                ->where('offrir.id_rapport', '=', $id_rapport)
+                ->select('offrir.id_medicament', 'medicament.nom_commercial', 'offrir.qte_offerte','offrir.id_rapport')
+                ->first();
+
+            return $medicament;
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+    public function updateMed($id_rapport, $id_medicament, $qte_offerte)
+    {
+        try {
+            DB::table('offrir')
+                ->where('id_rapport', $id_rapport)
+                ->where('id_medicament', $id_medicament)
+                ->update(['qte_offerte' => $qte_offerte]);
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
 
 }
 

@@ -100,26 +100,27 @@ class RapportVisiteController extends Controller
             return view('vues.error', compact('erreur'));
         }
     }
-    public function updateMed($id_med)
+    public function updateMed($id_rapport)
     {
         $erreur = Session::get('erreur');
 
         try {
             $RapportVisite = new ServiceRapportVisite();
-            $unMed = $RapportVisite->getMedById($id_med);
-            $titreVue = "Modification d'un medicament Offert";
-            return view('vues/listeMedicament', compact('unMed', 'titreVue'));
+            $unMed = $RapportVisite->getUnMedicament($id_rapport);
+            $titreVue = "Modification d'un médicament offert";
+            return view('vues/formMedicament', compact('unMed', 'titreVue'));
         } catch (Exception $e) {
             $erreur = $e->getMessage();
-            return view('vues/error', compact( 'erreur'));
+            return view('vues/error', compact('erreur'));
         }
     }
-    public function removeMedicaments($id_med)
+
+    public function removeMedicaments($id_med,$id_rapp)
     {
         $erreur = "";
         try {
             $serviceRapportVisite = new ServiceRapportVisite();
-            $serviceRapportVisite->deleteMedicament($id_med);
+            $serviceRapportVisite->deleteMedicament($id_med, $id_rapp);
 
         } catch (Exception $e) {
             Session::put('erreur', $e->getMessage());
@@ -127,4 +128,27 @@ class RapportVisiteController extends Controller
         return redirect('getListeMed'($id_med));
     }
 
+    public function validateMed(Request $request)
+    {
+        $erreur = "";
+
+        try {
+            $id_medicament = $request->input('id_medicament');
+            $qte_offerte = $request->input('qteofferte');
+            $id_rapport = $request->input('id_rapport');
+
+            $serviceMedicament = new ServiceRapportVisite();
+
+            if ($id_medicament && $id_rapport) {
+                $serviceMedicament->updateMed($id_rapport, $id_medicament, $qte_offerte);
+            }
+            return redirect('getListeMed/' . $id_rapport);
+
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/error', compact('erreur'));
+        }
+    }
+
 }
+

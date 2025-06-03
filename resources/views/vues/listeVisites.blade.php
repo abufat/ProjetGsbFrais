@@ -18,7 +18,7 @@
                                  <td class="text-center">{{$unRapportVisite->date_rapport }}</td>
                                  <td style="text-align:center;">
                                      <a href="/getListeMed/{{$unRapportVisite->id_rapport}}">
-                                        <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Modifier">
+                                        <span class="glyphicon glyphicon-plus" data-toggle="tooltip" data-placement="top" title="Modifier">
                                         </span>
                                      </a>
                                  </td>
